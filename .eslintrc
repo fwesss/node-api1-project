@@ -1,0 +1,41 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "plugins": ["import", "optimize-regex", "functional"],
+  "extends": [
+    "eslint:recommended",
+    "eslint-config-prettier",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "airbnb-base",
+    "plugin:functional/recommended",
+    "eslint:recommended",
+    "plugin:node/recommended",
+    // must be last
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "strict": ["error", "never"],
+    "optimize-regex/optimize-regex": "warn",
+    "spaced-comment": ["error", "always", { "markers": ["/"] }],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never"
+      }
+    ]
+  },
+  "env": {
+    "browser": false,
+    "es6": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js"]
+      }
+    }
+  }
+}

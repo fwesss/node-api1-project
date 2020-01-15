@@ -26,7 +26,7 @@
     "format": "yarn run prettier --ignore-path .gitignore --write",
     "lint": "eslint --ext .js .",
     "prettier": "prettier --ignore-path .gitignore \"**/*.+(json|js)\"",
-    "server": "nodemon -r esm index.js",
+    "server": "nodemon index.js",
     "validate": "npm-run-all --parallel check-format lint"
   },
   "husky": {
