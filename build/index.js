@@ -1,16 +1,13 @@
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
 const express = require('express');
 const usersDb = require('./data/db');
-
 const server = express();
-
 server.listen(4000, () => console.log('=== server listening on port 4000 ==='));
-
 server.use(express.json());
-
 server.get('/', (_req, res) => {
   res.send('hello world...');
 });
-
 server.post('/users', ({ body: userInfo }, res) =>
   !userInfo.name || !userInfo.bio
     ? res.status(400).json({
@@ -31,7 +28,6 @@ server.post('/users', ({ body: userInfo }, res) =>
           });
         })
 );
-
 server.get('/users', (_req, res) => {
   usersDb
     .find()
@@ -46,7 +42,6 @@ server.get('/users', (_req, res) => {
       });
     });
 });
-
 server.get('/users/:id', ({ params: { id } }, res) => {
   usersDb
     .findById(id)
@@ -66,7 +61,6 @@ server.get('/users/:id', ({ params: { id } }, res) => {
       });
     });
 });
-
 server.delete('/users/:id', ({ params: { id } }, res) => {
   usersDb
     .remove(id)
@@ -86,7 +80,6 @@ server.delete('/users/:id', ({ params: { id } }, res) => {
       });
     });
 });
-
 server.put('/users/:id', ({ body: userInfo, params: { id } }, res) =>
   !userInfo.name || !userInfo.bio
     ? res.status(400).json({

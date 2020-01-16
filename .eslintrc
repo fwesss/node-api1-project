@@ -1,8 +1,16 @@
 {
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2020
+    "ecmaVersion": 2020,
+    "project": "./tsconfig.json"
   },
-  "plugins": ["import", "optimize-regex", "functional"],
+  "plugins": [
+    "import",
+    "optimize-regex",
+    "functional",
+    "@typescript-eslint",
+    "@typescript-eslint/eslint-plugin"
+  ],
   "extends": [
     "eslint:recommended",
     "eslint-config-prettier",
@@ -12,6 +20,11 @@
     "plugin:functional/recommended",
     "eslint:recommended",
     "plugin:node/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "eslint-config-prettier/@typescript-eslint",
+    "prettier/@typescript-eslint",
     // must be last
     "plugin:prettier/recommended"
   ],
@@ -23,10 +36,12 @@
       "error",
       "ignorePackages",
       {
-        "js": "never"
+        "js": "never",
+        "ts": "never"
       }
     ],
-    "functional/no-expression-statement": "off"
+    "functional/no-expression-statement": "off",
+    "node/no-unsupported-features/es-syntax": "off"
   },
   "env": {
     "browser": false,
@@ -35,8 +50,11 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [".js"]
+        "extensions": [".js, .ts"]
       }
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts"]
     }
   }
 }

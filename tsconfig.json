@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "importHelpers": true,
+    "module": "commonjs",
+    "outDir": "./build",
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "target": "es2017",
+    "lib": ["esnext"],
+    "allowJs": true,
+    "esModuleInterop": true
+  },
+  "include": ["**/*"]
+}
