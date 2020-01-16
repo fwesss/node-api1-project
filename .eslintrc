@@ -25,7 +25,8 @@
       {
         "js": "never"
       }
-    ]
+    ],
+    "functional/no-expression-statement": "off"
   },
   "env": {
     "browser": false,
