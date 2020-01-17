@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 exports.seed = function(knex) {
   return knex('users')
     .truncate()
@@ -12,6 +12,6 @@ exports.seed = function(knex) {
           name: 'Frodo Baggins',
           bio: 'The ring bearer',
         },
-      ]);
-    });
-};
+      ])
+    })
+}

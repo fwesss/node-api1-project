@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "data/*": ["/data"]
+    },
     "declaration": true,
     "importHelpers": true,
     "module": "commonjs",
@@ -11,5 +15,6 @@
     "allowJs": true,
     "esModuleInterop": true
   },
-  "include": ["**/*"]
+  "include": ["."],
+  "exclude": ["node_modules", "build"]
 }

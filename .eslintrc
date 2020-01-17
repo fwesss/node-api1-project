@@ -40,8 +40,16 @@
         "ts": "never"
       }
     ],
+    "arrow-body-style": ["warn", "never"],
     "functional/no-expression-statement": "off",
-    "node/no-unsupported-features/es-syntax": "off"
+    "node/no-unsupported-features/es-syntax": "off",
+    "node/no-missing-import": [
+      "error",
+      {
+        "resolvePaths": ["."],
+        "tryExtensions": [".js", ".ts", ".json", ".node"]
+      }
+    ]
   },
   "env": {
     "browser": false,
@@ -50,7 +58,7 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [".js, .ts"]
+        "extensions": [".js", ".ts"]
       }
     },
     "import/parsers": {
