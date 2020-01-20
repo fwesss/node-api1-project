@@ -1,18 +1,18 @@
-'use strict'
-Object.defineProperty(exports, '__esModule', { value: true })
-const tslib_1 = require('tslib')
-const console_1 = require('console')
-const express_1 = tslib_1.__importDefault(require('express'))
-const Either_1 = require('fp-ts/lib/Either')
-const pipeable_1 = require('fp-ts/lib/pipeable')
-const db_1 = require('./data/db')
-const server = express_1.default()
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+const tslib_1 = require('tslib');
+const console_1 = require('console');
+const express_1 = tslib_1.__importDefault(require('express'));
+const Either_1 = require('fp-ts/lib/Either');
+const pipeable_1 = require('fp-ts/lib/pipeable');
+const db_1 = require('./data/db');
+const server = express_1.default();
 // eslint-disable-next-line functional/functional-parameters
 server.listen(4000, () =>
   console_1.log('=== server listening on port 4000 ===')
-)
-server.use(express_1.default.json())
-server.get('/', (_req, res) => res.send('hello world...'))
+);
+server.use(express_1.default.json());
+server.get('/', (_req, res) => res.send('hello world...'));
 server.post('/users', ({ body: userInfo }, res) =>
   !userInfo.name || !userInfo.bio
     ? res.status(400).json({
@@ -30,7 +30,7 @@ server.post('/users', ({ body: userInfo }, res) =>
             error,
           })
         )
-)
+);
 server.get('/users', (_req, res) =>
   db_1
     .find()
@@ -49,7 +49,7 @@ server.get('/users', (_req, res) =>
       )
     )
     .then(console_1.log)
-)
+);
 server.get('/users/:id', ({ params: { id } }, res) =>
   db_1
     .findById(id)
@@ -68,7 +68,7 @@ server.get('/users/:id', ({ params: { id } }, res) =>
         error,
       })
     )
-)
+);
 server.delete('/users/:id', ({ params: { id } }, res) =>
   db_1
     .remove(id)
@@ -87,7 +87,7 @@ server.delete('/users/:id', ({ params: { id } }, res) =>
         error,
       })
     )
-)
+);
 server.put('/users/:id', ({ body: userInfo, params: { id } }, res) =>
   !userInfo.name || !userInfo.bio
     ? res.status(400).json({
@@ -111,4 +111,4 @@ server.put('/users/:id', ({ body: userInfo, params: { id } }, res) =>
             error,
           })
         )
-)
+);

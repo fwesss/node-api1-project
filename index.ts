@@ -1,7 +1,7 @@
-import { log } from 'console'
-import express from 'express'
-import { fold } from 'fp-ts/lib/Either'
-import { pipe } from 'fp-ts/lib/pipeable'
+import { log } from 'console';
+import express from 'express';
+import { fold } from 'fp-ts/lib/Either';
+import { pipe } from 'fp-ts/lib/pipeable';
 
 import {
   find as findUsers,
@@ -9,24 +9,20 @@ import {
   insert as insertUser,
   remove as removeUser,
   update as updateUser,
-} from './data/db'
+} from './data/db';
 
-const server: express.Application = express()
+const server: express.Application = express();
 
 // eslint-disable-next-line functional/functional-parameters
-server.listen(4000, () => log('=== server listening on port 4000 ==='))
+server.listen(4000, () => log('=== server listening on port 4000 ==='));
 
-server.use(express.json())
+server.use(express.json());
 
-server.get('/', (_req, res) => res.send('hello world...'))
+server.get('/', (_req, res) => res.send('hello world...'));
 
 server.post('/users', ({ body: userInfo }, res) =>
-  !userInfo.name || !userInfo.bio
-    ? res.status(400).json({
-        success: false,
-        errorMessage: 'Please provide name and bio for the user.',
-      })
-    : insertUser(userInfo)
+  userInfo.name && userInfo.bio
+    ? insertUser(userInfo)
         .then(user => res.status(201).json({ success: true, user }))
         .catch(error =>
           res.status(500).json({
@@ -36,7 +32,11 @@ server.post('/users', ({ body: userInfo }, res) =>
             error,
           })
         )
-)
+    : res.status(400).json({
+        success: false,
+        errorMessage: 'Please provide name and bio for the user.',
+      })
+);
 
 server.get('/users', (_req, res) =>
   findUsers()
@@ -55,7 +55,7 @@ server.get('/users', (_req, res) =>
       )
     )
     .then(log)
-)
+);
 
 server.get('/users/:id', ({ params: { id } }, res) =>
   findUserById(id)
@@ -74,7 +74,7 @@ server.get('/users/:id', ({ params: { id } }, res) =>
         error,
       })
     )
-)
+);
 
 server.delete('/users/:id', ({ params: { id } }, res) =>
   removeUser(id)
@@ -93,15 +93,11 @@ server.delete('/users/:id', ({ params: { id } }, res) =>
         error,
       })
     )
-)
+);
 
 server.put('/users/:id', ({ body: userInfo, params: { id } }, res) =>
-  !userInfo.name || !userInfo.bio
-    ? res.status(400).json({
-        success: false,
-        errorMessage: 'Please provide name and bio for the user.',
-      })
-    : updateUser(id, userInfo)
+  userInfo.name && userInfo.bio
+    ? updateUser(id)(userInfo)
         .then(user =>
           user
             ? res.status(200).json({ success: true, user })
@@ -117,4 +113,8 @@ server.put('/users/:id', ({ body: userInfo, params: { id } }, res) =>
             error,
           })
         )
-)
+    : res.status(400).json({
+        success: false,
+        errorMessage: 'Please provide name and bio for the user.',
+      })
+);
